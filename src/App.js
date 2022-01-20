@@ -26,10 +26,12 @@ function App() {
         <Container>
           <Grid container spacing={3} justifyContent='space-between' alignItems="center">
             <Grid item xs={12} sm={7}>
-              <Posts></Posts>
+              <Posts setCurrentId = {setCurrentId}></Posts>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form >
+              <Form 
+                currentId = {currentId}
+                setCurrentId = {setCurrentId}>
               </Form>
             </Grid>
           </Grid>
