@@ -24,7 +24,7 @@ function App() {
       </AppBar>
       <Grow in>
         <Container>
-          <Grid container spacing={3} justifyContent='space-between' alignItems="center">
+          <Grid container className={classes.mainContainer} spacing={3} justifyContent='space-between' alignItems="stretch">
             <Grid item xs={12} sm={7}>
               <Posts setCurrentId = {setCurrentId}></Posts>
             </Grid>
