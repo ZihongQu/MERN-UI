@@ -9,7 +9,6 @@ import useStyles from './styles.js';
 
 
 function App() {
-  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -26,12 +25,10 @@ function App() {
         <Container>
           <Grid container className={classes.mainContainer} spacing={3} justifyContent='space-between' alignItems="stretch">
             <Grid item xs={12} sm={7}>
-              <Posts setCurrentId = {setCurrentId}></Posts>
+              <Posts></Posts>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form 
-                currentId = {currentId}
-                setCurrentId = {setCurrentId}>
+              <Form>
               </Form>
             </Grid>
           </Grid>

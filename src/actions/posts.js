@@ -46,3 +46,7 @@ export const likePost = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const setSelectedPost = (post) => {
+    return {type: constants.EDIT, payload: post};
+}

@@ -6,9 +6,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from 'moment';
 import { useDispatch } from "react-redux";
-import { deletePost, likePost } from "../../../actions/posts.js";
+import { deletePost, likePost, setSelectedPost } from "../../../actions/posts.js";
 
-const Post = ({post, setCurrentId}) =>{
+const Post = ({post}) =>{
     const classes = useStyles();
     const dispatch = useDispatch();
     return (
@@ -24,7 +24,7 @@ const Post = ({post, setCurrentId}) =>{
                     size='small' 
                     title='Edit'
                     onClick={ () =>
-                        setCurrentId(post._id)
+                        dispatch(setSelectedPost(post))
                      }>
                     <MoreHorizIcon fontSize="medium"></MoreHorizIcon>
                 </Button>

@@ -1,6 +1,6 @@
 import * as constants from '../constants/actionType';
 
-export default (posts = [],action) => {
+const posts = (posts = [],action) => {
     switch(action.type){
         case constants.FETCH_ALL:
             return action.payload; 
@@ -16,5 +16,6 @@ export default (posts = [],action) => {
             return posts.map((p) => (p._id === action.payload._id ? action.payload : p));
         default:
             return posts; 
-    }
+    } 
 }
+export default posts;
