@@ -2,19 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import useStyles from './styles.js';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
+import decode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import memories from '../../images/memories.png';
 import * as constants from '../../constants/actionType';
 
 const Navbar = () => {
     const classes = useStyles();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
+
+        // checking if token has expired. if so, log user out
         const token = user?.token;
+        if(token){
+            const decoded = decode(token);
+
+            // if the token time is smaller than current time in the unit of miliseconds, logout user.
+            if(decoded.exp * 1000 < new Date().getTime()){
+                logout();
+            }
+        }
+
         setUser(JSON.parse(localStorage.getItem('profile')));
     },[location])
 

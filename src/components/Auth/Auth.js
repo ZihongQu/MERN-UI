@@ -7,25 +7,34 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
 import Input from './Input';
 import * as actionType from '../../constants/actionType'
+import {signup, signin} from '../../actions/auth';
 
 const Auth = () => {
     const classes = useStyles();
     const [isSignUp, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState({firstName:'',lastName:'',email:'',password:'',confirmPassword:'',});
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(isSignUp){
+            dispatch(signup(formData,navigate), navigate);
+        }
+        else{
+            dispatch(signin(formData,navigate), navigate);
+        }
     };
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
     const handleShowPwd = () => setShowPassword((prev) => !prev);
 
     const switchMode = () => {
         setIsSignUp((prev) => !prev);
+        setShowPassword(false);
     }
 
     const googleSuccess = async (res) => {
@@ -55,7 +64,7 @@ const Auth = () => {
                         {isSignUp && (
                             <>
                                 <Input name='firstName' label='First Name' handleChange={handleChange} autoFocus half></Input>
-                                <Input name='lastName' label='Last Name' handleChanges={handleChange} half></Input>
+                                <Input name='lastName' label='Last Name' handleChange={handleChange} half></Input>
                             </>
                         )}
                         <Input name='email' label='Email Address' handleChange={handleChange} type='email'/>

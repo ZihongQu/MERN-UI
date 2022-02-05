@@ -9,8 +9,9 @@ import { useSelector } from "react-redux";
 const Form = () =>{
     const classes = useStyles();
     const post = useSelector((state) => state.selectedPost);
-    const [postData, setPostData] = useState({creator:'', title:'', message:'',tags:'',selectedFile:''});
+    const [postData, setPostData] = useState({ title:'', message:'',tags:'',selectedFile:''});
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.authData);
 
     useEffect(() => {
         if(post) setPostData(post);
@@ -19,23 +20,32 @@ const Form = () =>{
     const handleSubmit = (e) =>{
         e.preventDefault();
         if(post){
-            dispatch(updatePost(post._id, postData));    
+            dispatch(updatePost(post._id, {...postData, creator: user?.result.name}));    
         }
         else{
-            dispatch(createPost(postData));
+            dispatch(createPost({...postData, creator: user?.result.name}));
         }
         clear();
     }
     const clear = () =>{
         dispatch(setSelectedPost(null));
-        setPostData({creator:'', title:'', message:'',tags:'',selectedFile:''});
+        setPostData({title:'', message:'',tags:'',selectedFile:''});
+    }
+
+    if(!user){ // if not signed in, display the following modal
+        return (
+            <Paper className = {classes.paper}>
+                <Typography variant='h6' align='center'>
+                    Please sign in to create your own memories!
+                </Typography>
+            </Paper>
+        )
     }
 
     return (
         <Paper className = {classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{post ? 'Edit your memory' : 'Create a memory!'}</Typography>
-                <TextField name="creator" variant="outlined" label="Creator" fullWidth onChange={(e) => setPostData({...postData, creator:e.target.value})} value={postData.creator}></TextField>
                 <TextField name="title" variant="outlined" label="Title" fullWidth onChange={(e) => setPostData({...postData, title:e.target.value})} value={postData.title}></TextField>
                 <TextField name="message" variant="outlined" label="Message" fullWidth onChange={(e) => setPostData({...postData, message:e.target.value})} value={postData.message}></TextField>
                 <TextField name="tag" variant="outlined" label="Tag" fullWidth onChange={(e) => setPostData({...postData, tags:e.target.value.split(',')})} value={postData.tags}></TextField>
