@@ -10,7 +10,7 @@ import PostDetail from './components/PostDetail/PostDetail.js';
 
 function App() {
 
-  const user = useSelector((state) => state.auth);
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   return (
     <BrowserRouter>
