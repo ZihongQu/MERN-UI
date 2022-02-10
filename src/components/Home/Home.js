@@ -44,9 +44,10 @@ const Home = () => {
     }
 
     const searchPost = () => {
-        if(search.trim()){
+        if(search || tags){
             // dispatch => fetch posts
             dispatch(getPostBySearch({search, tags: tags.join(',')})); // turn tags array into string
+            navigate(`/posts/search?searchQuery=${search||'none'}&tags=${tags}`);
         }
         else{
             navigate('/');

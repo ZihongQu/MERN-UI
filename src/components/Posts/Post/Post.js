@@ -12,7 +12,7 @@ import { deletePost, likePost, setSelectedPost } from "../../../actions/posts.js
 const Post = ({post}) =>{
     const classes = useStyles();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.authData);
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     const Likes = () => {
         if (post.likes.length > 0) {

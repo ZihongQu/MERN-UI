@@ -21,8 +21,7 @@ function App() {
           <Route path='/posts' exact element={<Home/>}></Route>
           <Route path='/posts/search' exact element={<Home/>}></Route>
           <Route path='/posts/:id' exact element={<PostDetail/>}></Route>
-          // if user already signed in, redirect sign in url to home page
-          <Route path='/auth' exact element={user ? <Navigate to='/posts'/> : <Auth/>}></Route>
+          <Route path='/auth' exact element={<Auth/>}></Route>
         </Routes >
       </Container>
     </BrowserRouter>

@@ -11,7 +11,7 @@ const Form = () =>{
     const post = useSelector((state) => state.selectedPost);
     const [postData, setPostData] = useState({ title:'', message:'',tags:'',selectedFile:''});
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.authData);
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         if(post) setPostData(post);
