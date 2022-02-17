@@ -43,7 +43,7 @@ const Form = () =>{
     }
 
     return (
-        <Paper className = {classes.paper}>
+        <Paper className = {classes.paper} elevation={4}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{post ? 'Edit your memory' : 'Create a memory!'}</Typography>
                 <TextField name="title" variant="outlined" label="Title" fullWidth onChange={(e) => setPostData({...postData, title:e.target.value})} value={postData.title}></TextField>

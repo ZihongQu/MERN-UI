@@ -25,7 +25,7 @@ const Home = () => {
     const [tags, setTags] = useState([]);
 
     useEffect(() =>{
-      dispatch(getPost());
+      dispatch(getPost(Number(page)));
     },[dispatch])
 
     const handleKeyPress = (e) => {
@@ -44,7 +44,9 @@ const Home = () => {
     }
 
     const searchPost = () => {
-        if(search || tags){
+        if(search || tags.length > 0){
+            console.log(search)
+            console.log(tags)
             // dispatch => fetch posts
             dispatch(getPostBySearch({search, tags: tags.join(',')})); // turn tags array into string
             navigate(`/posts/search?searchQuery=${search||'none'}&tags=${tags}`);
@@ -84,7 +86,7 @@ const Home = () => {
                     <Form>
                     </Form>
                     <Paper elevation={6}>
-                        <Pagination className={classes.pagination}></Pagination>
+                        <Pagination page={page} className={classes.pagination}></Pagination>
                     </Paper>
                 </Grid>
             </Grid>

@@ -2,9 +2,9 @@ import * as api from '../api';
 import * as constants from '../constants/actionType';
 
 //ACTION CREATORS
-export const getPost = () => async (dispatch) => {
+export const getPost = (page) => async (dispatch) => {
     try {
-        const {data} = await api.fetchPosts();
+        const {data} = await api.fetchPosts(page);
         dispatch ({type: constants.FETCH_ALL,payload: data});
     } catch (error) {
         console.log(error);
@@ -14,7 +14,7 @@ export const getPost = () => async (dispatch) => {
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
     try {
         const {data} = await api.fetchPostsBySearch(searchQuery);
-        console.log(data);
+        dispatch({type: constants.FETCH_BY_SEARCH, payload: data});
     } catch (error) {
         console.log(error);
     }
