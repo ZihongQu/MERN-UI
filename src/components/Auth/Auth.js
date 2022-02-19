@@ -1,8 +1,8 @@
 import {React,useState} from 'react'
 import { Typography, Button, Avatar, Paper, Grid, Container, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { useNavigate} from 'react-router-dom';
-import {GoogleLogin} from 'react-google-login'
+import { useNavigate } from "react-router-dom";
+import {GoogleLogin} from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
 import Input from './Input';
@@ -19,10 +19,10 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(isSignUp){
-            dispatch(signup(formData,navigate), navigate);
+            dispatch(signup(formData,navigate));
         }
         else{
-            dispatch(signin(formData,navigate), navigate);
+            dispatch(signin(formData,navigate));
         }
     };
 

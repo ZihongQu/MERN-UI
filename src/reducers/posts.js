@@ -1,6 +1,6 @@
 import * as constants from '../constants/actionType';
 
-const posts = (state = [],action) => {
+const posts = (state = {isLoading: true, posts: []},action) => {
     switch(action.type){
         case constants.FETCH_ALL:
             return {
@@ -38,6 +38,21 @@ const posts = (state = [],action) => {
             return {
                 ...state,
                 posts: state.posts.map((p) => (p._id === action.payload._id ? action.payload : p))
+            };
+        case constants.START_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case constants.END_LOADING:
+            return {
+                ...state,
+                isLoading: false
+            };
+        case constants.POST_DETAIL:
+            return {
+                ...state,
+                postDetail: action.payload
             };
         default:
             return state; 

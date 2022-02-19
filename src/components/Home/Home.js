@@ -45,8 +45,6 @@ const Home = () => {
 
     const searchPost = () => {
         if(search || tags.length > 0){
-            console.log(search)
-            console.log(tags)
             // dispatch => fetch posts
             dispatch(getPostBySearch({search, tags: tags.join(',')})); // turn tags array into string
             navigate(`/posts/search?searchQuery=${search||'none'}&tags=${tags}`);
@@ -81,13 +79,14 @@ const Home = () => {
                             onDelete={handleDelete}
                             label = 'Search Tags'
                             variant='outlined'/>
-                        <Button onClick={searchPost} className={classes.searchButton} variant='contained' color='primary'>Search</Button>
+                        <Button onClick={searchPost} className={classes.searchButton} variant='contained'>Search</Button>
                     </AppBar>
                     <Form>
                     </Form>
+                    {!searchQuery &&
                     <Paper elevation={6}>
                         <Pagination page={page} className={classes.pagination}></Pagination>
-                    </Paper>
+                    </Paper>}
                 </Grid>
             </Grid>
             </Container>

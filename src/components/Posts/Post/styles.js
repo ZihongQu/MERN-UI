@@ -13,6 +13,12 @@ export default makeStyles({
   fullHeightCard: {
     height: '100%',
   },
+  like: {
+    color: '#bc4749',
+  },
+  delete: {
+    color: '#bc4749',
+  },
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -43,6 +49,10 @@ export default makeStyles({
   },
   title: {
     padding: '0 16px',
+  },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
   },
   cardActions: {
     padding: '0 16px 8px 16px',

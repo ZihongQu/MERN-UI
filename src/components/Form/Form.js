@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
-import useStyles from './styles.js';
 import FileBase from 'react-file-base64';
-import { createPost, updatePost, setSelectedPost } from '../../actions/posts';
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
-import {useDispatch} from 'react-redux';
-import { useSelector } from "react-redux";
+import {useDispatch,useSelector} from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import useStyles from './styles.js';
+import { createPost, updatePost, setSelectedPost } from '../../actions/posts';
 
 const Form = () =>{
     const classes = useStyles();
@@ -12,6 +12,7 @@ const Form = () =>{
     const [postData, setPostData] = useState({ title:'', message:'',tags:'',selectedFile:''});
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(post) setPostData(post);
@@ -20,10 +21,10 @@ const Form = () =>{
     const handleSubmit = (e) =>{
         e.preventDefault();
         if(post){
-            dispatch(updatePost(post._id, {...postData, creator: user?.result.name}));    
+            dispatch(updatePost(post._id, {...postData, creator: user?.result.name}));
         }
         else{
-            dispatch(createPost({...postData, creator: user?.result.name}));
+            dispatch(createPost({...postData, creator: user?.result.name},navigate));
         }
         clear();
     }
@@ -57,8 +58,8 @@ const Form = () =>{
                         onDone ={({base64}) => setPostData({...postData,selectedFile:base64})}
                     />
                 </div>
-                <Button className={classes.buttonSubmit} variant = "contained" color = "primary" size = "large" type = "submit" fullWidth>SUBMIT</Button>
-                <Button variant = "contained" color = "secondary" onClick = {clear} size = "large" fullWidth>CLEAR</Button>
+                <Button className={classes.buttonSubmit} variant = "contained" size = "large" type = "submit" fullWidth>SUBMIT</Button>
+                <Button className={classes.buttonClear} variant = "contained" onClick = {clear} size = "large" fullWidth>CLEAR</Button>
             </form>
         </Paper>
     )
