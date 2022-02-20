@@ -10,3 +10,4 @@ export const LOGOUT = 'LOGOUT';
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';
 export const POST_DETAIL ='POST_DETAIL';
+export const ADD_COMMENT = 'ADD_COMMENT';

@@ -9,15 +9,15 @@ export default makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#77ad78'
+    backgroundColor: '#524e4e'
   },
   logout: {
     backgroundColor: 'white',
-    color: '#77ad78'
+    color: '#202020'
   },
   login:{
     backgroundColor: 'white',
-    color: '#77ad78'
+    color: '#202020'
   },
   heading: {
     color: 'white',
@@ -49,7 +49,7 @@ export default makeStyles((theme) => ({
     marginLeft: '30px'
   },
   purple: {
-    color: '#77ad78',
+    color: '#202020',
     backgroundColor: 'white',
     marginRight: '20px'
   },

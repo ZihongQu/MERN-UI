@@ -5,6 +5,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import moment from 'moment';
 import useStyles from './styles';
 import {getPostById,getPostBySearch} from '../../actions/posts.js';
+import CommentSection from './CommentSection';
 
 const PostDetail = () => {
   const {posts,postDetail,isLoading} = useSelector((state) => state.posts);
@@ -51,7 +52,9 @@ const PostDetail = () => {
             <Typography variant='h6' gutterBottom color="textSecondary" component='h2'>{postDetail.tags.map((tag) => `#${tag} `)}</Typography>
             <Typography variant='body1' gutterBottom component='p'>{postDetail.message}</Typography>
             <Typography variant='h6'>Created by: {postDetail.creator}</Typography>
-            <Typography variant='body3' color="textSecondary">Created at: {moment(postDetail.createdAt).format('YYYY-MM-DD')}</Typography>
+            <Typography variant='body2' color="textSecondary">Created at: {moment(postDetail.createdAt).format('YYYY-MM-DD')}</Typography>
+            <Divider style={{ margin: '20px 0' }}></Divider>
+            <CommentSection postDetail={postDetail}></CommentSection>
             
         </div>
         <div className={classes.imageSection}>
@@ -60,7 +63,7 @@ const PostDetail = () => {
       </div>
       {recommendedPosts.length > 0 && (
         <div className={classes.section}>
-          <Typography variant='h5' >You might also like these</Typography>
+          <Typography variant='h5' >You might also like ...</Typography>
           <Divider style={{ margin: '20px 0' }}></Divider>
           
             <div className={classes.recommendedPosts}>

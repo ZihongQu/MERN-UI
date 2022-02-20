@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     padding: '16px',
   },
   searchButton: {
-    backgroundColor: '#77ad78',
+    backgroundColor: '#787575',
     color: 'white'
   },
   gridContainer: {

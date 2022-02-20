@@ -17,7 +17,7 @@ export default makeStyles({
     color: '#bc4749',
   },
   delete: {
-    color: '#bc4749',
+    color: '#054a29',
   },
   card: {
     display: 'flex',

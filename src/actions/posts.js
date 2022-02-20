@@ -77,3 +77,13 @@ export const getPostById = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const addComment = (comment, postId) => async (dispatch) => {
+
+    try {
+        const {data} = await api.addComment(comment, postId);
+        dispatch({type: constants.ADD_COMMENT, payload:data});
+    } catch (error) {
+        console.log(error);
+    }
+}

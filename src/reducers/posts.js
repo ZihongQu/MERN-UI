@@ -54,6 +54,11 @@ const posts = (state = {isLoading: true, posts: []},action) => {
                 ...state,
                 postDetail: action.payload
             };
+        case constants.ADD_COMMENT:
+            return {
+                ...state,
+                posts: state.posts.map((p) => (p._id === action.payload._id ? action.payload : p))
+            }
         default:
             return state; 
     } 
