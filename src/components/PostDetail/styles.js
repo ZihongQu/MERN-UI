@@ -47,9 +47,10 @@ export default makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between'
       },
-      commentInnerCOntainer: {
+      commentInnerContainer: {
         height: '200px',
         overflowY: 'auto',
-        marginRight: '30px'
-      }
+        marginRight: '30px',
+        width:'50%'
+      },
 }))

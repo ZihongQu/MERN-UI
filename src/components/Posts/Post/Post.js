@@ -4,9 +4,8 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from 'moment';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate} from "react-router-dom";
 import { deletePost, likePost, setSelectedPost } from "../../../actions/posts.js";
 import useStyles from './styles.js';
@@ -16,10 +15,19 @@ const Post = ({post}) =>{
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const navigate = useNavigate();
+    const [likes, setLikes] = useState([]);
+    const userId = user?.result?.googleId || user?.result?._id
+
+    // checks if use already liked the post or not
+    const alreadyLiked = post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id)); 
+
+    const handleLike = () => {
+        dispatch(likePost(post._id));
+    }
 
     const Likes = () => {
         if (post.likes.length > 0) {
-        return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+        return alreadyLiked
             ? (
             <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
             ) : (
@@ -62,7 +70,7 @@ const Post = ({post}) =>{
                 </CardContent>
             </ButtonBase>
             <CardActions className={classes.cardActions}>
-                <Button size="small" className={classes.like} disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+                <Button size="small" className={classes.like} disabled={!user?.result} onClick={handleLike}>
                     <Likes />
                 </Button>
                 <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?.googleId || user?.result?._id)} onClick={() => dispatch(deletePost(post._id))}>
