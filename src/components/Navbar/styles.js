@@ -35,6 +35,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'end',
     width: '100%',
+    marginRight:'30px'
   },
   userName: {
     display: 'flex',

@@ -43,7 +43,11 @@ const CommentSection = ({postDetail}) => {
                             <TextField fullWidth rows={4} multiline label='Comment' variant='outlined' value={comment} onChange={handleChange}></TextField>
                             <Button variant='contained' style={{marginTop: '10px'}} fullWidth disabled={comment.length === 0} onClick={handleClick}>Sumbit</Button>
                         </>
-                    ) : ('Please log in first')}
+                    ) : (
+                        <div >
+                            <h4>Please log in to comment</h4>
+                        </div>    
+                        )}
                     </div>
             </div>
         </div>
