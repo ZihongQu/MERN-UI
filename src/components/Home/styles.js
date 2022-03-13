@@ -5,7 +5,6 @@ export default makeStyles((theme) => ({
     borderRadius: 4,
     marginBottom: '1rem',
     display: 'flex',
-    padding: '16px',
   },
   pagination: {
     borderRadius: 4,
@@ -13,7 +12,7 @@ export default makeStyles((theme) => ({
     padding: '16px',
   },
   searchButton: {
-    backgroundColor: '#806443',
+    backgroundColor: '#726953',
     color: 'white'
   },
   gridContainer: {
@@ -21,4 +20,14 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
+  input: {
+      width: "100%",
+      padding: "12px 20px",
+      margin: "8px 0",
+      display: "inline-block",
+      border: "1px solid #ccc",
+      borderRadius: "4px",
+      boxSizing: "border-box"
+  }
+
 }));

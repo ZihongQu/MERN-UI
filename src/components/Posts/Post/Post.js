@@ -10,7 +10,7 @@ import { useNavigate} from "react-router-dom";
 import { deletePost, likePost, setSelectedPost } from "../../../actions/posts.js";
 import useStyles from './styles.js';
 
-const Post = ({post}) =>{
+const Post = ({post,setIsShowCreateModal}) =>{
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -42,25 +42,20 @@ const Post = ({post}) =>{
         navigate(`/posts/${post._id}`);
     }
 
+    const handleEdit = () => {
+        dispatch(setSelectedPost(post));
+        setIsShowCreateModal(true);
+    }
+
     return (
-        <Card className={classes.card} raised elevation={6}>
+        <Card className={classes.card} square elevation={6}>
             <ButtonBase className={classes.cardAction} onClick={openPost}>
                 <CardMedia className={classes.media} image={post.selectedFile} title={post.title}></CardMedia>
                 <div className={classes.overlay}>
                     <Typography variant='h6'>{post.creator}</Typography>
                     <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
                 </div>
-                {/* <div className={classes.overlay2}>
-                {post.creatorId === (user?.result?.googleId || user?.result?._id) && <Button 
-                        style={{color:"white"}} 
-                        size='small' 
-                        title='Edit'
-                        onClick={ () =>
-                            dispatch(setSelectedPost(post))
-                        }>
-                        <MoreHorizIcon fontSize="medium"></MoreHorizIcon>
-                    </Button>}
-                </div> */}
+
                 <div className={classes.details}>
                     <Typography variant='body2' color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
@@ -76,8 +71,8 @@ const Post = ({post}) =>{
                 <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?.googleId || user?.result?._id)} onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize='small'></DeleteIcon>&nbsp;DELETE
                 </Button>
-                <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?.googleId || user?.result?._id)}onClick={ () =>
-                            dispatch(setSelectedPost(post))
+                <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?.googleId || user?.result?._id)} onClick={
+                            handleEdit
                         }>
                             <EditIcon fontSize='small'></EditIcon>
                             Edit</Button>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AppBar, Typography, Grow, Grid, Paper, TextField, Button } from '@material-ui/core';
+import { Container, AppBar, Typography, Grow, Grid, Paper, TextField, Button, IconButton } from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import {useNavigate, useLocation} from 'react-router-dom';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ChipInput from 'material-ui-chip-input';
 
 import { getPost, getPostBySearch } from '../../actions/posts';
@@ -9,6 +10,8 @@ import Posts from '../Posts/Posts.js';
 import Form from '../Form/Form.js';
 import Pagination from '../Pagination/Pagination.js';
 import useStyles from './styles.js';
+import CreatePostModal from '../CreatePostModal/CreatePostModal.js';
+import SearchIcon from '@mui/icons-material/Search';
 
 function useQuery(){
     return new URLSearchParams(useLocation().search)
@@ -23,13 +26,14 @@ const Home = () => {
     const searchQuery = query.get('searchQuery');
     const [search, setSearch] = useState('');
     const [tags, setTags] = useState([]);
+    const [isShowCreateModal, setIsShowCreateModal] = useState(false);
 
     useEffect(() =>{
       dispatch(getPost(Number(page)));
     },[dispatch])
 
     const handleKeyPress = (e) => {
-        if(e.keyCode === 13){ // once user hits enter
+        if(e.key === "Enter"){ // once user hits enter
             // search post logic
             searchPost();
         }
@@ -54,40 +58,42 @@ const Home = () => {
         }
     }
 
+    const toggleCreateModal = () => {
+        setIsShowCreateModal(prev => !prev);
+    }
+
     return (
         <Grow in>
             <Container maxWidth='xl'>
-            <Grid container className={classes.mainContainer} spacing={3} justifyContent='space-between' alignItems="stretch" className={classes.gridContainer}>
-                <Grid item xs={12} sm={6} md={9}>
-                    <Posts></Posts>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <AppBar className={classes.appBarSearch} position='static' color='inherit'>
-                        <TextField 
-                            variant='outlined' 
+
+                <div style={{display:'flex', alignItems: "baseline",justifyContent:'end',marginBottom:"3%",width:'100%'}}>
+                    <div style={{width:'40%'}}>
+                        <IconButton style={{margin:'2%',color:'gold',width:'100%'}} variant='contained' onClick={toggleCreateModal}><AddCircleIcon fontSize='large'/>Create New</IconButton>
+                    </div>
+                    <div style={{width:'30%'}}>
+                        <input 
+                            style={{width: '100%'}}
+                            className={classes.input}
                             name="search" 
-                            label='Search Memories'
-                            fullWidth 
+                            placeholder='Hit ENTER to search for Movies posts!'
                             value={search}
                             onKeyPress={handleKeyPress}
                             onChange={(e) => {setSearch(e.target.value)}}/>
-                        
-                        <ChipInput 
-                            style={{margin: '10px 0'}}
-                            value={tags}
-                            onAdd={handleAdd}
-                            onDelete={handleDelete}
-                            label = 'Search Tags'
-                            variant='outlined'/>
-                        <Button onClick={searchPost} className={classes.searchButton} variant='contained'>Search</Button>
-                    </AppBar>
-                    <Form>
-                    </Form>
-                    {!searchQuery &&
-                    <Paper elevation={6}>
-                        <Pagination page={page} className={classes.pagination}></Pagination>
-                    </Paper>}
-                </Grid>
+                    </div>
+                </div>
+        
+            {isShowCreateModal && <CreatePostModal open={isShowCreateModal} setIsShowCreateModal={setIsShowCreateModal}></CreatePostModal>}
+            <Grid container className={classes.mainContainer} spacing={3} justifyContent='space-between' alignItems="stretch" className={classes.gridContainer}>
+              
+                <Posts setIsShowCreateModal = {setIsShowCreateModal}></Posts>
+
+            <Paper style={{width:'100%',margin:'3%'}}>
+                <div style={{display:'flex', width:'100%', justifyContent:"center"}}>
+                            {!searchQuery &&
+                                <Pagination page={page} className={classes.pagination}></Pagination>
+                            }
+                </div>
+            </Paper>
             </Grid>
             </Container>
         </Grow>
