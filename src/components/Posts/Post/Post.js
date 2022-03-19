@@ -15,11 +15,9 @@ const Post = ({post,setIsShowCreateModal}) =>{
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const navigate = useNavigate();
-    const [likes, setLikes] = useState([]);
-    const userId = user?.result?.googleId || user?.result?._id
 
     // checks if use already liked the post or not
-    const alreadyLiked = post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id)); 
+    const alreadyLiked = post.likes.find((like) => like === (user?.result?._id)); 
 
     const handleLike = () => {
         dispatch(likePost(post._id));
@@ -68,10 +66,10 @@ const Post = ({post,setIsShowCreateModal}) =>{
                 <Button size="small" className={classes.like} disabled={!user?.result} onClick={handleLike}>
                     <Likes />
                 </Button>
-                <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?.googleId || user?.result?._id)} onClick={() => dispatch(deletePost(post._id))}>
+                <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?._id)} onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize='small'></DeleteIcon>&nbsp;DELETE
                 </Button>
-                <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?.googleId || user?.result?._id)} onClick={
+                <Button size="small" className={classes.delete} disabled={post.creatorId != (user?.result?._id)} onClick={
                             handleEdit
                         }>
                             <EditIcon fontSize='small'></EditIcon>

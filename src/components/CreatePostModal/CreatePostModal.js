@@ -41,7 +41,7 @@ const CreatePostModal = ({open,setIsShowCreateModal}) =>{
     if(!user){ // if not signed in, display the following modal
         return (
             <Modal
-                style={{marginTop:'5%',marginLeft:'40%'}}
+                className={classes.modal}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -58,7 +58,7 @@ const CreatePostModal = ({open,setIsShowCreateModal}) =>{
 
     return (
         <Modal
-            style={{marginTop:'5%',marginLeft:'40%'}}
+            className={classes.modal}
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
