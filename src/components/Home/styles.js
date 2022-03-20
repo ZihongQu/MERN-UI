@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import { ImportantDevices } from "@material-ui/icons";
 
 export default makeStyles((theme) => ({
   appBarSearch: {
@@ -28,6 +29,5 @@ export default makeStyles((theme) => ({
       border: "1px solid #ccc",
       borderRadius: "4px",
       boxSizing: "border-box"
-  }
-
+  },
 }));

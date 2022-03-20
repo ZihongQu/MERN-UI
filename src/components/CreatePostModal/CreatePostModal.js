@@ -49,7 +49,7 @@ const CreatePostModal = ({open,setIsShowCreateModal}) =>{
                 >
                 <Paper className = {classes.paper}>
                     <Typography variant='h6' align='center'>
-                        Please sign in to create your own memories!
+                        Please sign in to create your own posts!
                     </Typography>
                 </Paper>
             </Modal>
@@ -66,9 +66,9 @@ const CreatePostModal = ({open,setIsShowCreateModal}) =>{
             >
             <Paper className = {classes.paper} elevation={4}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">{post ? 'Edit your memory' : 'Create a memory!'}</Typography>
+                <Typography variant="h6">{post ? 'Edit' : 'Create'}</Typography>
                 <TextField name="title" variant="outlined" label="Title" fullWidth onChange={(e) => setPostData({...postData, title:e.target.value})} value={postData.title}></TextField>
-                <TextField name="message" variant="outlined" label="Message" fullWidth onChange={(e) => setPostData({...postData, message:e.target.value})} value={postData.message}></TextField>
+                <TextField name="message" variant="outlined" label="Content" fullWidth onChange={(e) => setPostData({...postData, message:e.target.value})} value={postData.message}></TextField>
                 <TextField name="tag" variant="outlined" label="Tag" fullWidth onChange={(e) => setPostData({...postData, tags:e.target.value.split(',')})} value={postData.tags}></TextField>
                 <div className={classes.fileInput}>
                     <FileBase 

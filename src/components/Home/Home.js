@@ -10,6 +10,7 @@ import Posts from '../Posts/Posts.js';
 import Form from '../Form/Form.js';
 import Pagination from '../Pagination/Pagination.js';
 import useStyles from './styles.js';
+import './styles.css';
 import CreatePostModal from '../CreatePostModal/CreatePostModal.js';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -68,7 +69,7 @@ const Home = () => {
 
                 <div style={{display:'flex', alignItems: "baseline",justifyContent:'end',marginBottom:"3%",width:'100%'}}>
                     <div style={{width:'40%'}}>
-                        <IconButton style={{margin:'2%',color:'gold',width:'100%'}} variant='contained' onClick={toggleCreateModal}><AddCircleIcon fontSize='large'/>Create New</IconButton>
+                        <IconButton style={{margin:'2%',color:'#F0A500',width:'100%'}} variant='contained' onClick={toggleCreateModal}><AddCircleIcon fontSize='large'/>Create New</IconButton>
                     </div>
                     <div style={{width:'30%'}}>
                         <input 
@@ -88,7 +89,7 @@ const Home = () => {
                 <Posts setIsShowCreateModal = {setIsShowCreateModal}></Posts>
 
             <Paper style={{width:'100%',margin:'3%'}}>
-                <div style={{display:'flex', width:'100%', justifyContent:"center"}}>
+                <div style={{display:'flex', width:'100%', justifyContent:"center",backgroundColor:"black"}}>
                             {!searchQuery &&
                                 <Pagination page={page} className={classes.pagination}></Pagination>
                             }

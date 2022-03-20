@@ -1,0 +1,7 @@
+
+.MuiPaginationItem-root{
+    color:white !important;
+}
+.MuiPaginationItem-outlined{
+  border: 1px solid white;
+}

@@ -13,14 +13,14 @@ export default makeStyles((theme) => ({
   },
   logout: {
     backgroundColor: 'white',
-    color: '#202020'
+    color: '#F0A500'
   },
   login:{
     backgroundColor: 'white',
-    color: '#202020'
+    color: '#F0A500'
   },
   heading: {
-    color: 'white',
+    color: '#F0A500',
     textDecoration: 'none',
   },
   image: {
@@ -41,7 +41,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginRight: '20px',
-    color: 'white'
+    color: '#F0A500'
   },
   brandContainer: {
     display: 'flex',
@@ -49,8 +49,8 @@ export default makeStyles((theme) => ({
     margin: '5px',
     marginLeft: '30px'
   },
-  purple: {
-    color: '#202020',
+  avatar: {
+    color: '#F0A500',
     backgroundColor: 'white',
     marginRight: '20px'
   },
